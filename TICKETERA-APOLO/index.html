@@ -385,7 +385,7 @@ footer strong { color:var(--gold); letter-spacing:2px; }
         <div class="bottom">
           <div class="price">$8.000<small>Precio sin comisión</small></div>
 <button class="btn"
-  onclick="comprar('Un domingo insoportable', 200, 6000, 5000)">
+  onclick="comprar('Un domingo insoportable', 200, 6000, 5000, '20 de noviembre')">
   COMPRAR
 </button>
         </div>
@@ -724,17 +724,26 @@ function moneda(n) {
 
 
 
-function comprar(nombre, general, anticipada, estudiante) {
+
+function comprar(nombre, general, anticipada, estudiante, fecha) {
   obraActual = nombre;
   document.getElementById('obra').textContent = nombre;
 
   const tipo = document.getElementById('tipo');
+  const funcion = document.getElementById('funcion');
 
   tipo.innerHTML = `
     <option value="${general}">General — ${moneda(general)}</option>
     <option value="${anticipada}">Anticipada — ${moneda(anticipada)}</option>
     <option value="${estudiante}">Estudiante — ${moneda(estudiante)}</option>
   `;
+
+  // Seleccionar la fecha de la función
+  if (fecha) {
+    funcion.innerHTML = `
+      <option value="${fecha}">${fecha}</option>
+    `;
+  }
 
   tipo.selectedIndex = 0;
   cantidad.value = '1';
@@ -743,6 +752,7 @@ function comprar(nombre, general, anticipada, estudiante) {
   overlay.classList.add('show');
   actualizarTotal();
 }
+
 
 
 
