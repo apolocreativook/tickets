@@ -363,7 +363,10 @@ footer strong { color:var(--gold); letter-spacing:2px; }
         <div class="meta">◷ Fecha: a confirmar<br>⌖ Sala: a confirmar · Córdoba</div>
         <div class="bottom">
           <div class="price">$18.000<small>Precio sin comisión</small></div>
-          <button class="btn" onclick="comprar('Un Domingo Insoportable',18000)">COMPRAR</button>
+<button class="btn"
+  onclick="comprar('Buenos vecinos', 20000, 17000, 14000)">
+  COMPRAR
+</button>
         </div>
       </div>
     </article>
@@ -381,7 +384,10 @@ footer strong { color:var(--gold); letter-spacing:2px; }
         <div class="meta">◷ Fecha: 22 Noviembre<br>⌖ Sala: Teatrino Ismael Rossi · Va. Del Rosario, Córdoba</div>
         <div class="bottom">
           <div class="price">$18.000<small>Precio sin comisión</small></div>
-          <button class="btn" onclick="comprar('Buenos Vecinos',18000)">COMPRAR</button>
+<button class="btn"
+  onclick="comprar('Buenos vecinos', 20000, 15000, 10000)">
+  COMPRAR
+</button>
         </div>
       </div>
     </article>    
@@ -686,33 +692,29 @@ function moneda(n) {
   }).format(n);
 }
 
-function comprar(nombre, precio) {
+
+
+function comprar(nombre, general, anticipada, estudiante) {
   obraActual = nombre;
   document.getElementById('obra').textContent = nombre;
 
-  // Si el precio de la tarjeta no existe entre las opciones, agregarlo como opción general.
-  const opcionAnterior = tipo.querySelector('option[data-precio-tarjeta="true"]');
-  if (opcionAnterior) opcionAnterior.remove();
+  const tipo = document.getElementById('tipo');
 
-  const precioTarjeta = Number(precio);
-  const existePrecio = Array.from(tipo.options).some(
-    opcion => Number(opcion.value) === precioTarjeta
-  );
+  tipo.innerHTML = `
+    <option value="${general}">General — ${moneda(general)}</option>
+    <option value="${anticipada}">Anticipada — ${moneda(anticipada)}</option>
+    <option value="${estudiante}">Estudiante — ${moneda(estudiante)}</option>
+  `;
 
-  if (!existePrecio) {
-    const opcionGeneral = document.createElement('option');
-    opcionGeneral.value = String(precioTarjeta);
-    opcionGeneral.textContent = 'General — ' + moneda(precioTarjeta);
-    opcionGeneral.dataset.precioTarjeta = 'true';
-    tipo.insertBefore(opcionGeneral, tipo.firstChild);
-  }
-
-  tipo.value = String(precioTarjeta);
+  tipo.selectedIndex = 0;
   cantidad.value = '1';
+
   document.getElementById('aviso').classList.remove('show');
   overlay.classList.add('show');
   actualizarTotal();
 }
+
+
 
 
 function actualizarTotal() {
