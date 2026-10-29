@@ -303,6 +303,24 @@ footer strong { color:var(--gold); letter-spacing:2px; }
 .payment-result-back{border:1px solid rgba(255,255,255,.22);color:#f7f2e8}
 .payment-result-small{font-size:12px!important;color:#aaa194!important;margin-top:22px!important}
 
+.obra-card {
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 8 / 5;
+  overflow: hidden;
+  position: relative;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.obra-afiche {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 0;
+}
 </style>
 </head>
 <body>
@@ -351,12 +369,15 @@ footer strong { color:var(--gold); letter-spacing:2px; }
 
   <div class="grid">
     <article class="card" data-status="available">
-      <div class="poster">
-        <span class="tag">En cartel</span>
-        <div class="poster-title"><small>Apolo Creativo</small>Un domingo<br>insoportable</div>
-      </div>
+<div class="obra-card">
+  <img
+    src="https://apolocreativo.site/img/domingoba.webp?raw=true"
+    alt="El Peor Evento del Año"
+    class="obra-afiche"
+  >
+</div>
       <div class="card-body">
-        <div class="genre">Comedia dramática</div>
+        <div class="genre">Comedia · Drama</div>
         <h3>Un Domingo Insoportable</h3>
         <p class="description">Una reunión que parecía normal se convierte en una cadena de enredos, verdades incómodas y situaciones tan absurdas como familiares.</p>
         <button class="read-more" type="button" onclick="leerMas('domingo')">LEER MÁS ↗</button>
@@ -372,10 +393,13 @@ footer strong { color:var(--gold); letter-spacing:2px; }
     </article>
     
     <article class="card" data-status="available">
-      <div class="poster">
-        <span class="tag">En cartel</span>
-        <div class="poster-title"><small>Apolo Creativo</small>Buenos<br>vecinos</div>
-      </div>
+<div class="obra-card">
+  <img
+    src="https://apolocreativo.site/img/BUENOS.webp?raw=true"
+    alt="Buenos vecinos"
+    class="obra-afiche"
+  >
+</div>
       <div class="card-body">
         <div class="genre">Comedia</div>
         <h3>Buenos vecinos</h3>
@@ -393,14 +417,17 @@ footer strong { color:var(--gold); letter-spacing:2px; }
     </article>    
 
     <article class="card" data-status="soon">
-      <div class="poster rose">
-        <span class="tag soon">Próximamente</span>
-        <div class="poster-title"><small>Una producción Apolo</small>La última<br>función</div>
-      </div>
+<div class="obra-card">
+  <img
+    src="https://apolocreativo.site/img/BANNER%204%20INST%20subiuda.webp?raw=true"
+    alt="Mi casa es un quilombo"
+    class="obra-afiche"
+  >
+</div>
       <div class="card-body">
-        <div class="genre">Comedia dramática</div>
-        <h3>La Última Función</h3>
-        <p class="description">Entre sueños pendientes, risas y despedidas, quienes hacen teatro se enfrentan a la función más importante de sus vidas.</p>
+        <div class="genre">Comedia</div>
+        <h3>Mi casa es un quilombo</h3>
+        <p class="description">Lo que debería ser una noche tranquila se convierte en un verdadero desastre cuando una serie de visitas inesperadas, mentiras improvisadas y relaciones complicadas se cruzan bajo un mismo techo. </p>
         <button class="read-more" type="button" onclick="leerMas('ultima')">LEER MÁS ↗</button>
         <div class="meta">◷ Fecha: próximamente<br>⌖ Sala: a confirmar · Córdoba</div>
         <div class="bottom">
@@ -411,13 +438,16 @@ footer strong { color:var(--gold); letter-spacing:2px; }
     </article>
 
     <article class="card" data-status="soon">
-      <div class="poster green">
-        <span class="tag soon">Próximamente</span>
-        <div class="poster-title"><small>Una producción Apolo</small>No abras la puerta<br>después de las ocho</div>
-      </div>
+<div class="obra-card">
+  <img
+    src="https://apolocreativo.site/img/despues-de-las-ocho500.webp"
+    alt="El Peor Evento del Año"
+    class="obra-afiche"
+  >
+</div>
       <div class="card-body">
-        <div class="genre">Comedia negra</div>
-        <h3>No abras la puerta después de las ocho</h3>
+        <div class="genre">Drama · Suspenso</div>
+        <h3>No se abre la puerta después de las ocho</h3>
         <p class="description">Una visita inesperada, una noche complicada y decisiones cuestionables. Reírse puede ser la única salida.</p>
         <button class="read-more" type="button" onclick="leerMas('puerta')">LEER MÁS ↗</button>
         <div class="meta">◷ Fecha: próximamente<br>⌖ Sala: a confirmar · Córdoba</div>
@@ -640,17 +670,17 @@ const detallesObras = {
   }, 
   
   ultima: {
-    titulo: 'La Última Función',
-    genero: 'Comedia dramática',
-    sinopsis: 'Entre sueños pendientes, risas y despedidas, quienes hacen teatro se enfrentan a la función más importante de sus vidas.\n\nReemplazá este texto por la sinopsis completa de la obra.',
-    elenco: 'A completar con los nombres de quienes actúan.',
-    creditos: 'Libreto: a completar.\nDirección: a completar.',
-    adicional: 'Duración: a confirmar.\nEstreno y funciones: a confirmar.\nClasificación / edad recomendada: a confirmar.'
+    titulo: 'Mi casa es un quilombo',
+    genero: 'Comedia',
+    sinopsis: 'Entre amores, engaños, sospechas y personajes que aparecen cuando menos deberían, cada intento por ocultar la verdad termina empeorando las cosas. En este departamento, cualquiera puede tener una llave, pero nadie parece tener las respuestas. Y cuando todos coinciden en el mismo lugar, el quilombo es inevitable.\n\nMi casa es un quilombo es una comedia de enredos donde un departamento se convierte en el escenario de situaciones disparatadas. Marcelo llega con Carola haciéndole creer que el lugar es suyo, pero la aparición inesperada de Tato desata una cadena de mentiras, sospechas y confusiones que nadie parece poder controlar.\n\nCon la llegada de Gloria, la madre de Tato, y Celeste, su novia, el caos alcanza su punto máximo. Entre secretos, excusas absurdas y entradas inoportunas, cada personaje intenta salvarse como puede, dando lugar a una noche de humor argentino, picardía y enredos donde abrir la puerta puede ser el comienzo de un verdadero quilombo.',
+    elenco: 'En selección de casting',
+    creditos: 'Libreto: Lolo Ramos.\nDirección: Lolo Ramos.',
+    adicional: 'Duración: 80 minutos.\nEstreno y funciones: a confirmar.\nClasificación / edad recomendada: Apto todo público.'
   },
   puerta: {
-    titulo: 'No abras la puerta después de las ocho',
-    genero: 'Comedia negra',
-    sinopsis: 'Una visita inesperada, una noche complicada y decisiones cuestionables. Reírse puede ser la única salida.\n\nReemplazá este texto por la sinopsis completa de la obra.',
+    titulo: 'No se abre la puerta después de las ocho',
+    genero: 'Drama de suspenso',
+    sinopsis: 'En una casa familiar de la Argentina de 1978, una familia se reúne para celebrar un cumpleaños.\n\nAfuera, el país todavía festeja el Mundial; adentro, la mesa está servida, la radio encendida y todos esperan a Daniel. La noche transcurre entre situaciones cotidianas, humor, recuerdos y pequeños conflictos familiares.\n\nPero a medida que pasan las horas, algo comienza a cambiar. Una puerta, una hora y ciertos silencios despiertan recuerdos que nadie quiere nombrar. Lo que comienza como una reunión familiar se transforma lentamente en una historia de miedo, ausencia, culpa y memoria..',
     elenco: 'A completar con los nombres de quienes actúan.',
     creditos: 'Libreto: Lolo Ramos.\nDirección: Lolo Ramos.',
     adicional: 'Estreno previsto: marzo de 2027.\nDuración: a confirmar.\nSala y dirección: a confirmar.'
