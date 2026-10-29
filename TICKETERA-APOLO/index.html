@@ -291,9 +291,32 @@ footer strong { color:var(--gold); letter-spacing:2px; }
   .detail-modal { padding: 20px; }
 }
 
+
+.payment-result-screen{position:fixed;inset:0;z-index:99999;background:#101010;color:#f7f2e8;display:flex;align-items:center;justify-content:center;padding:24px;font-family:inherit}
+.payment-result-card{width:min(100%,560px);background:#191919;border:1px solid rgba(205,170,95,.38);border-radius:22px;padding:34px 28px;text-align:center;box-shadow:0 24px 90px rgba(0,0,0,.45)}
+.payment-result-icon{width:64px;height:64px;margin:0 auto 18px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(205,170,95,.13);color:#d7b66a;font-size:34px;font-weight:700}
+.payment-result-eyebrow{font-size:11px;letter-spacing:2px;color:#d7b66a;margin:0 0 12px}
+.payment-result-card h1{font-size:clamp(25px,5vw,36px);line-height:1.15;margin:0 0 14px}
+.payment-result-card p{line-height:1.65;color:#ded8cc}
+.payment-result-whatsapp,.payment-result-back{display:block;text-decoration:none;border-radius:12px;padding:14px 18px;margin:14px auto 0;max-width:360px;font-weight:700}
+.payment-result-whatsapp{background:#25d366;color:#062b14}
+.payment-result-back{border:1px solid rgba(255,255,255,.22);color:#f7f2e8}
+.payment-result-small{font-size:12px!important;color:#aaa194!important;margin-top:22px!important}
+
 </style>
 </head>
 <body>
+<div id="paymentResultScreen" class="payment-result-screen" style="display:none">
+  <div class="payment-result-card">
+    <div id="paymentResultIcon" class="payment-result-icon">…</div>
+    <p class="payment-result-eyebrow">APOLO CREATIVO · TICKETERA</p>
+    <h1 id="paymentResultTitle">Estamos verificando tu pago</h1>
+    <p id="paymentResultMessage">Esperá un instante mientras comprobamos el estado de la operación con Mercado Pago.</p>
+    <a id="whatsappNamesButton" class="payment-result-whatsapp" href="#" target="_blank" rel="noopener" style="display:none">Enviar nombres por WhatsApp</a>
+    <a id="backToTicketeraButton" class="payment-result-back" href="/">Volver a la ticketera</a>
+    <p class="payment-result-small">Si el pago figura pendiente, no vuelvas a pagar. Esperá la actualización de Mercado Pago.</p>
+  </div>
+</div>
 
 <header>
   <a class="logo" href="#">APOLO<span>✦</span></a>
@@ -515,6 +538,78 @@ footer strong { color:var(--gold); letter-spacing:2px; }
 </div>
 
 <script>
+
+// Retorno de Mercado Pago: no confiamos solo en la URL; consultamos al servidor.
+(async function manejarRetornoDePago() {
+  const params = new URLSearchParams(window.location.search);
+  const paymentId = params.get('payment_id') || params.get('collection_id');
+  const paymentStatus = (params.get('status') || params.get('collection_status') || params.get('payment')).toLowerCase();
+  const externalReference = params.get('external_reference') || '';
+  if (!paymentId && !['success','failure','pending'].includes(paymentStatus)) return;
+
+  const screen = document.getElementById('paymentResultScreen');
+  if (!screen) return;
+  screen.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+
+  const icon = document.getElementById('paymentResultIcon');
+  const title = document.getElementById('paymentResultTitle');
+  const message = document.getElementById('paymentResultMessage');
+  const wa = document.getElementById('whatsappNamesButton');
+  const back = document.getElementById('backToTicketeraButton');
+  const whatsappNumber = '5493517426042';
+
+  function mostrarWhatsApp(texto) {
+    wa.href = 'https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(texto);
+    wa.style.display = 'block';
+  }
+
+  if (!paymentId) {
+    if (paymentStatus === 'failure') {
+      icon.textContent = '×';
+      title.textContent = 'El pago no se completó';
+      message.textContent = 'Mercado Pago informó que la operación no se completó. Podés volver a la ticketera e intentarlo nuevamente.';
+    } else {
+      icon.textContent = '…';
+      title.textContent = 'Estamos verificando tu pago';
+      message.textContent = 'Todavía no tenemos un identificador para verificar la operación. Revisá tu cuenta de Mercado Pago antes de volver a intentar.';
+    }
+    return;
+  }
+
+  title.textContent = 'Estamos verificando tu pago';
+  message.textContent = 'Consultamos a Mercado Pago para confirmar el estado real de la operación.';
+  try {
+    const response = await fetch('https://apolo-pagos.onrender.com/verificar-pago?payment_id=' + encodeURIComponent(paymentId));
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || 'No se pudo verificar el pago.');
+
+    if (data.status === 'approved') {
+      icon.textContent = '✓';
+      title.textContent = '¡Gracias por tu compra!';
+      message.textContent = 'Tu pago fue aprobado correctamente. Para organizar el ingreso, escribinos por WhatsApp con los nombres y apellidos de todas las personas que asistirán. Si no enviás los nombres, la compra quedará identificada con los datos disponibles en Mercado Pago, sujeto a verificación.';
+      mostrarWhatsApp('Hola, Apolo Creativo. Mi pago fue aprobado. Quiero informar los nombres de las personas asistentes.\\nObra/compra: ' + (data.description || 'Entrada de teatro') + '\\nNúmero de pago: ' + paymentId + '\\nReferencia: ' + (data.external_reference || externalReference) + '\\nNombres de asistentes: ');
+    } else if (data.status === 'pending' || data.status === 'in_process' || data.status === 'authorized') {
+      icon.textContent = '…';
+      title.textContent = 'Tu pago está pendiente';
+      message.textContent = 'Mercado Pago todavía no confirmó la aprobación. No vuelvas a pagar por ahora. Cuando se actualice el estado, podés consultar tu operación.';
+      mostrarWhatsApp('Hola, Apolo Creativo. Quisiera consultar el estado de mi pago. Número de pago: ' + paymentId + '.');
+    } else {
+      icon.textContent = '×';
+      title.textContent = 'El pago no fue aprobado';
+      message.textContent = 'Mercado Pago informa que esta operación no está aprobada. Podés revisar el motivo en tu cuenta de Mercado Pago o volver a la ticketera para intentarlo otra vez.';
+    }
+    // Remove payment parameters to avoid re-showing the result on every refresh.
+    back.href = window.location.pathname || '/';
+  } catch (error) {
+    console.error('No se pudo verificar el pago:', error);
+    icon.textContent = '…';
+    title.textContent = 'No pudimos confirmar el pago todavía';
+    message.textContent = 'La compra puede haber sido procesada, pero no pudimos consultar su estado ahora. Revisá tu cuenta de Mercado Pago y contactanos antes de volver a pagar.';
+    mostrarWhatsApp('Hola, Apolo Creativo. Volví de Mercado Pago pero no pude confirmar el estado de mi pago. Número de pago: ' + paymentId + '. ¿Me ayudan a verificarlo?');
+  }
+})();
+
 
 // EDITÁ ESTA INFORMACIÓN para completar la ficha de cada obra.
 // Podés reemplazar los textos entre comillas con la sinopsis, elenco y créditos definitivos.
