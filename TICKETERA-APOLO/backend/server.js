@@ -6,6 +6,7 @@ app.use(express.json());
 
 const ALLOWED_ORIGINS = [
   "https://tickets-9p4o.onrender.com",
+  "https://tickets.apolocreativo.site",
   "https://apolocreativo.site",
   "https://www.apolocreativo.site"
 ];
