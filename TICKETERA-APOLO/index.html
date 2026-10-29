@@ -543,7 +543,7 @@ footer strong { color:var(--gold); letter-spacing:2px; }
 (async function manejarRetornoDePago() {
   const params = new URLSearchParams(window.location.search);
   const paymentId = params.get('payment_id') || params.get('collection_id');
-  const paymentStatus = (params.get('status') || params.get('collection_status') || params.get('payment')).toLowerCase();
+  const paymentStatus = (params.get('status') || params.get('collection_status') || params.get('payment') || '').toLowerCase();
   const externalReference = params.get('external_reference') || '';
   if (!paymentId && !['success','failure','pending'].includes(paymentStatus)) return;
 
@@ -571,8 +571,9 @@ footer strong { color:var(--gold); letter-spacing:2px; }
       message.textContent = 'Mercado Pago informó que la operación no se completó. Podés volver a la ticketera e intentarlo nuevamente.';
     } else {
       icon.textContent = '…';
-      title.textContent = 'Estamos verificando tu pago';
-      message.textContent = 'Todavía no tenemos un identificador para verificar la operación. Revisá tu cuenta de Mercado Pago antes de volver a intentar.';
+      title.textContent = 'Necesitamos verificar tu pago';
+      message.textContent = 'No recibimos el número de operación para comprobar el estado automáticamente. No vuelvas a pagar todavía: revisá tu cuenta de Mercado Pago y escribinos para que podamos verificarlo.';
+      mostrarWhatsApp('Hola, Apolo Creativo. Volví de Mercado Pago pero la ticketera no recibió el número de operación. ¿Me ayudan a verificar el estado de mi pago?');
     }
     return;
   }
