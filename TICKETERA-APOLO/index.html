@@ -221,6 +221,76 @@ footer strong { color:var(--gold); letter-spacing:2px; }
   font-size: 22px;
 }
 
+
+/* Detalle ampliado de cada obra */
+.read-more {
+  display: inline-block;
+  align-self: flex-start;
+  margin: 2px 0 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--light);
+  font: inherit;
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+.read-more:hover { color: white; }
+.detail-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  padding: 16px;
+  background: #000d;
+  align-items: center;
+  justify-content: center;
+}
+.detail-overlay.show { display: flex; }
+.detail-modal {
+  width: min(680px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 26px;
+  background: #19191c;
+  border: 1px solid #6a552a;
+  border-radius: 12px;
+  box-shadow: 0 20px 70px #0008;
+}
+.detail-modal .modal-head { align-items: flex-start; }
+.detail-modal h3 { font-size: clamp(24px, 5vw, 34px); line-height: 1.15; }
+.detail-modal .detail-genre {
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.detail-modal .detail-section {
+  margin-top: 22px;
+  padding-top: 17px;
+  border-top: 1px solid #38383d;
+}
+.detail-modal h4 {
+  margin: 0 0 9px;
+  color: var(--light);
+  font-size: 13px;
+  letter-spacing: .5px;
+}
+.detail-modal p, .detail-modal li {
+  color: #d0cfd2;
+  font-size: 14px;
+  line-height: 1.75;
+}
+.detail-modal p { margin: 0; white-space: pre-line; }
+.detail-modal ul { margin: 0; padding-left: 20px; }
+.detail-modal .detail-actions { margin-top: 22px; }
+@media(max-width:550px) {
+  .detail-modal { padding: 20px; }
+}
+
 </style>
 </head>
 <body>
@@ -260,19 +330,38 @@ footer strong { color:var(--gold); letter-spacing:2px; }
     <article class="card" data-status="available">
       <div class="poster">
         <span class="tag">En cartel</span>
-        <div class="poster-title"><small>Apolo Creativo presenta</small>Un domingo<br>insoportable</div>
+        <div class="poster-title"><small>Apolo Creativo</small>Un domingo<br>insoportable</div>
       </div>
       <div class="card-body">
         <div class="genre">Comedia dramática</div>
         <h3>Un Domingo Insoportable</h3>
         <p class="description">Una reunión que parecía normal se convierte en una cadena de enredos, verdades incómodas y situaciones tan absurdas como familiares.</p>
+        <button class="read-more" type="button" onclick="leerMas('domingo')">LEER MÁS ↗</button>
         <div class="meta">◷ Fecha: a confirmar<br>⌖ Sala: a confirmar · Córdoba</div>
         <div class="bottom">
-          <div class="price">$18.000<small>Precio demostrativo</small></div>
+          <div class="price">$18.000<small>Precio sin comisión</small></div>
           <button class="btn" onclick="comprar('Un Domingo Insoportable',18000)">COMPRAR</button>
         </div>
       </div>
     </article>
+    
+    <article class="card" data-status="available">
+      <div class="poster">
+        <span class="tag">En cartel</span>
+        <div class="poster-title"><small>Apolo Creativo</small>Buenos<br>vecinos</div>
+      </div>
+      <div class="card-body">
+        <div class="genre">Comedia</div>
+        <h3>Buenos vecinos</h3>
+        <p class="description">Una reunión que parecía normal se convierte en una cadena de enredos, verdades incómodas y situaciones tan absurdas como familiares.</p>
+        <button class="read-more" type="button" onclick="leerMas('vecinos')">LEER MÁS ↗</button>
+        <div class="meta">◷ Fecha: 22 Noviembre<br>⌖ Sala: Teatrino Ismael Rossi · Va. Del Rosario, Córdoba</div>
+        <div class="bottom">
+          <div class="price">$18.000<small>Precio sin comisión</small></div>
+          <button class="btn" onclick="comprar('Buenos Vecinos',18000)">COMPRAR</button>
+        </div>
+      </div>
+    </article>    
 
     <article class="card" data-status="soon">
       <div class="poster rose">
@@ -283,6 +372,7 @@ footer strong { color:var(--gold); letter-spacing:2px; }
         <div class="genre">Comedia dramática</div>
         <h3>La Última Función</h3>
         <p class="description">Entre sueños pendientes, risas y despedidas, quienes hacen teatro se enfrentan a la función más importante de sus vidas.</p>
+        <button class="read-more" type="button" onclick="leerMas('ultima')">LEER MÁS ↗</button>
         <div class="meta">◷ Fecha: próximamente<br>⌖ Sala: a confirmar · Córdoba</div>
         <div class="bottom">
           <div class="price">Muy pronto<small>Venta no habilitada</small></div>
@@ -300,6 +390,7 @@ footer strong { color:var(--gold); letter-spacing:2px; }
         <div class="genre">Comedia negra</div>
         <h3>No abras la puerta después de las ocho</h3>
         <p class="description">Una visita inesperada, una noche complicada y decisiones cuestionables. Reírse puede ser la única salida.</p>
+        <button class="read-more" type="button" onclick="leerMas('puerta')">LEER MÁS ↗</button>
         <div class="meta">◷ Fecha: próximamente<br>⌖ Sala: a confirmar · Córdoba</div>
         <div class="bottom">
           <div class="price">Muy pronto<small>Venta no habilitada</small></div>
@@ -322,6 +413,38 @@ footer strong { color:var(--gold); letter-spacing:2px; }
   <a href="https://www.apolocreativo.site/">apolocreativo.site</a>
 </footer>
 
+
+<div class="detail-overlay" id="detailOverlay" role="dialog" aria-modal="true" aria-labelledby="detailTitle" onclick="cerrarDetalleDesdeFondo(event)">
+  <div class="detail-modal">
+    <div class="modal-head">
+      <div>
+        <div class="detail-genre" id="detailGenre">Obra de teatro</div>
+        <h3 id="detailTitle">Título de la obra</h3>
+      </div>
+      <button class="close" type="button" onclick="cerrarDetalle()" aria-label="Cerrar detalles">×</button>
+    </div>
+    <div class="detail-section">
+      <h4>SINOPSIS</h4>
+      <p id="detailSynopsis"></p>
+    </div>
+    <div class="detail-section">
+      <h4>ELENCO</h4>
+      <p id="detailCast"></p>
+    </div>
+    <div class="detail-section">
+      <h4>LIBRETO Y DIRECCIÓN</h4>
+      <p id="detailCredits"></p>
+    </div>
+    <div class="detail-section">
+      <h4>INFORMACIÓN ADICIONAL</h4>
+      <p id="detailExtra"></p>
+    </div>
+    <div class="actions detail-actions">
+      <button class="btn outline" type="button" onclick="cerrarDetalle()">VOLVER A LA CARTELERA</button>
+    </div>
+  </div>
+</div>
+
 <div class="overlay" id="overlay" role="dialog" aria-modal="true">
   <div class="modal">
     <div class="modal-head">
@@ -335,16 +458,16 @@ footer strong { color:var(--gold); letter-spacing:2px; }
     <div class="field">
       <label for="funcion">Función</label>
       <select id="funcion">
-        <option value="Función a confirmar">Fecha y horario a confirmar</option>
+        <option value="Función a confirmar">Función a confirmar</option>
       </select>
     </div>
 
     <div class="field">
       <label for="tipo">Tipo de entrada</label>
       <select id="tipo">
-        <option value="18000">General — $18.000</option>
-        <option value="15000">Anticipada — $15.000</option>
-        <option value="13000">Estudiante — $13.000</option>
+        <option value="10000">General — $10.000</option>
+        <option value="5000">Anticipada — $5.000</option>
+        <option value="5000">Estudiante — $5.000</option>
       </select>
     </div>
 
@@ -356,7 +479,6 @@ footer strong { color:var(--gold); letter-spacing:2px; }
         <option value="3">3 entradas</option>
         <option value="4">4 entradas</option>
         <option value="5">5 entradas</option>
-        <option value="6">6 entradas</option>
       </select>
     </div>
 
@@ -387,12 +509,76 @@ footer strong { color:var(--gold); letter-spacing:2px; }
   CONTINUAR AL PAGO ↗
 </button>
 
-    <p class="note">Esta es una demostración. Los precios y las funciones deben verificarse antes de publicar. El pago todavía no está conectado a Mercado Pago.</p>
-    <div class="warning" id="aviso">El total se calculó correctamente, pero todavía falta conectar este botón con tu checkout real de Mercado Pago. No se realizó ningún cobro.</div>
+    <p class="note">Al continuar, se solicitará un enlace de pago seguro de Mercado Pago. Revisá la obra, el tipo de entrada, la cantidad y el total antes de pagar.</p>
+    <div class="warning" id="aviso" role="alert">No se pudo iniciar el pago. Revisá tu conexión e intentá nuevamente. No se realizó ningún cobro.</div>
   </div>
 </div>
 
 <script>
+
+// EDITÁ ESTA INFORMACIÓN para completar la ficha de cada obra.
+// Podés reemplazar los textos entre comillas con la sinopsis, elenco y créditos definitivos.
+const detallesObras = {
+  domingo: {
+    titulo: 'Un Domingo Insoportable',
+    genero: 'Comedia dramática',
+    sinopsis: 'Una reunión que parecía normal se convierte en una cadena de enredos, verdades incómodas y situaciones tan absurdas como familiares.\n\nUna familia se reúne en una mansión para celebrar un cumpleaños que, en principio, debería ser una jornada tranquila y familiar. Pero cuando comienzan a aparecer viejos conflictos, secretos, reproches y personalidades difíciles de controlar, el encuentro rápidamente se convierte en un verdadero caos.\n\nUn Domingo Insoportable es una comedia familiar cargada de situaciones absurdas, discusiones y personajes que harán todo lo posible por sobrevivir a una celebración que parece no tener fin. Porque cuando se junta toda la familia, nunca se sabe quién puede terminar perdiendo la paciencia primero.',
+    elenco: 'Claudia Moreschi, Lenny Gimonatti, Natalia Trillo, Clara Segura, Carolina Olmedo, Martina Pastor, Emme Ochoa, Lolo Ramos',
+    creditos: 'Libreto: Lolo Ramos.\nDirección: Lolo Ramos.',
+    adicional: 'Duración: 75 minutos.\nSala y dirección: CPC Gral. Paz | Pringles esq. Catamarca.\nClasificación / edad recomendada: Apto todo público.'
+  },
+  
+  vecinos: {
+    titulo: 'Buenos Vecinos',
+    genero: 'Comedia',
+    sinopsis: 'Una reunión que parecía normal se convierte en una cadena de enredos, verdades incómodas y situaciones tan absurdas como familiares.\n\nUna familia se reúne en una mansión para celebrar un cumpleaños que, en principio, debería ser una jornada tranquila y familiar. Pero cuando comienzan a aparecer viejos conflictos, secretos, reproches y personalidades difíciles de controlar, el encuentro rápidamente se convierte en un verdadero caos.\n\nUn Domingo Insoportable es una comedia familiar cargada de situaciones absurdas, discusiones y personajes que harán todo lo posible por sobrevivir a una celebración que parece no tener fin. Porque cuando se junta toda la familia, nunca se sabe quién puede terminar perdiendo la paciencia primero.',
+    elenco: 'Claudia Moreschi, Lenny Gimonatti, Natalia Trillo, Clara Segura, Carolina Olmedo, Martina Pastor, Emme Ochoa, Lolo Ramos',
+    creditos: 'Libreto: Lolo Ramos.\nDirección: Lolo Ramos.',
+    adicional: 'Duración: 75 minutos.\nSala y dirección: CPC Gral. Paz | Pringles esq. Catamarca.\nClasificación / edad recomendada: Apto todo público.'
+  }, 
+  
+  ultima: {
+    titulo: 'La Última Función',
+    genero: 'Comedia dramática',
+    sinopsis: 'Entre sueños pendientes, risas y despedidas, quienes hacen teatro se enfrentan a la función más importante de sus vidas.\n\nReemplazá este texto por la sinopsis completa de la obra.',
+    elenco: 'A completar con los nombres de quienes actúan.',
+    creditos: 'Libreto: a completar.\nDirección: a completar.',
+    adicional: 'Duración: a confirmar.\nEstreno y funciones: a confirmar.\nClasificación / edad recomendada: a confirmar.'
+  },
+  puerta: {
+    titulo: 'No abras la puerta después de las ocho',
+    genero: 'Comedia negra',
+    sinopsis: 'Una visita inesperada, una noche complicada y decisiones cuestionables. Reírse puede ser la única salida.\n\nReemplazá este texto por la sinopsis completa de la obra.',
+    elenco: 'A completar con los nombres de quienes actúan.',
+    creditos: 'Libreto: Lolo Ramos.\nDirección: Lolo Ramos.',
+    adicional: 'Estreno previsto: marzo de 2027.\nDuración: a confirmar.\nSala y dirección: a confirmar.'
+  }
+};
+
+const detailOverlay = document.getElementById('detailOverlay');
+
+function leerMas(id) {
+  const obra = detallesObras[id];
+  if (!obra) return;
+  document.getElementById('detailGenre').textContent = obra.genero;
+  document.getElementById('detailTitle').textContent = obra.titulo;
+  document.getElementById('detailSynopsis').textContent = obra.sinopsis;
+  document.getElementById('detailCast').textContent = obra.elenco;
+  document.getElementById('detailCredits').textContent = obra.creditos;
+  document.getElementById('detailExtra').textContent = obra.adicional;
+  detailOverlay.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function cerrarDetalle() {
+  detailOverlay.classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function cerrarDetalleDesdeFondo(event) {
+  if (event.target === detailOverlay) cerrarDetalle();
+}
+
 const overlay = document.getElementById('overlay');
 const tipo = document.getElementById('tipo');
 const cantidad = document.getElementById('cantidad');
@@ -407,7 +593,25 @@ function moneda(n) {
 function comprar(nombre, precio) {
   obraActual = nombre;
   document.getElementById('obra').textContent = nombre;
-  tipo.value = String(precio);
+
+  // Si el precio de la tarjeta no existe entre las opciones, agregarlo como opción general.
+  const opcionAnterior = tipo.querySelector('option[data-precio-tarjeta="true"]');
+  if (opcionAnterior) opcionAnterior.remove();
+
+  const precioTarjeta = Number(precio);
+  const existePrecio = Array.from(tipo.options).some(
+    opcion => Number(opcion.value) === precioTarjeta
+  );
+
+  if (!existePrecio) {
+    const opcionGeneral = document.createElement('option');
+    opcionGeneral.value = String(precioTarjeta);
+    opcionGeneral.textContent = 'General — ' + moneda(precioTarjeta);
+    opcionGeneral.dataset.precioTarjeta = 'true';
+    tipo.insertBefore(opcionGeneral, tipo.firstChild);
+  }
+
+  tipo.value = String(precioTarjeta);
   cantidad.value = '1';
   document.getElementById('aviso').classList.remove('show');
   overlay.classList.add('show');
@@ -439,16 +643,76 @@ function actualizarTotal() {
 
 
 
-function pagar() {
-  const subtotal = Number(tipo.value) * Number(cantidad.value);
+async function pagar() {
+  const botonPagar = document.querySelector('.modal .btn.full');
+  const aviso = document.getElementById('aviso');
+  const precioUnitario = Number(tipo.value);
+  const unidades = Number(cantidad.value);
+
+  if (!obraActual || !Number.isFinite(precioUnitario) || precioUnitario <= 0 ||
+      !Number.isInteger(unidades) || unidades < 1) {
+    aviso.textContent = 'Revisá el tipo y la cantidad de entradas antes de continuar.';
+    aviso.classList.add('show');
+    return;
+  }
+
+  const subtotal = precioUnitario * unidades;
   const recargo = Math.round(subtotal * 0.15);
   const total = subtotal + recargo;
 
-  document.getElementById('aviso').textContent =
-    'Total calculado: ' + moneda(total) +
-    '. Falta conectar este importe con el checkout real de Mercado Pago.';
+  // URL del Web Service de Render que genera la preferencia de Mercado Pago.
+  const API_PAGOS = 'https://apolo-pagos.onrender.com/crear-pago';
 
-  document.getElementById('aviso').classList.add('show');
+  const textoTipo = tipo.options[tipo.selectedIndex]
+    ? tipo.options[tipo.selectedIndex].textContent.trim()
+    : 'Entrada';
+
+  const orderId = (window.crypto && typeof window.crypto.randomUUID === 'function')
+    ? window.crypto.randomUUID()
+    : 'apolo-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+
+  const textoOriginal = botonPagar.textContent;
+  botonPagar.disabled = true;
+  botonPagar.textContent = 'GENERANDO PAGO...';
+  aviso.classList.remove('show');
+
+  try {
+    const respuesta = await fetch(API_PAGOS, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title: obraActual + ' — ' + textoTipo + ' — ' + unidades +
+          (unidades === 1 ? ' entrada' : ' entradas'),
+        amount: total,
+        orderId: orderId
+      })
+    });
+
+    let resultado = {};
+    try {
+      resultado = await respuesta.json();
+    } catch (_) {
+      resultado = {};
+    }
+
+    if (!respuesta.ok) {
+      throw new Error(resultado.error || 'El servidor no pudo crear el pago.');
+    }
+
+    if (!resultado.init_point || typeof resultado.init_point !== 'string') {
+      throw new Error('El servidor no devolvió el enlace de pago de Mercado Pago.');
+    }
+
+    // Redirigir al checkout de Mercado Pago.
+    window.location.assign(resultado.init_point);
+  } catch (error) {
+    console.error('Error al iniciar el pago:', error);
+    aviso.textContent =
+      'No se pudo generar el pago en este momento. Esperá unos segundos e intentá nuevamente. No se realizó ningún cobro.';
+    aviso.classList.add('show');
+    botonPagar.disabled = false;
+    botonPagar.textContent = textoOriginal;
+  }
 }
 
 function cerrar() {
@@ -467,7 +731,7 @@ overlay.addEventListener('click', function(e) {
 });
 
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') cerrar();
+  if (e.key === 'Escape') { cerrar(); cerrarDetalle(); }
 });
 
 document.querySelectorAll('.filter').forEach(function(button) {
