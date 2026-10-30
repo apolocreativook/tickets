@@ -496,7 +496,7 @@ footer strong { color:var(--gold); letter-spacing:2px; }
 <div class="obra-card">
   <img
     src="https://apolocreativo.site/img/despues-de-las-ocho500.webp"
-    alt="El Peor Evento del Año"
+    alt="No se abre la puerta después de las ocho"
     class="obra-afiche"
   >
 </div>
@@ -511,6 +511,29 @@ footer strong { color:var(--gold); letter-spacing:2px; }
           <button class="btn outline" onclick="proximamente()">PRÓXIMAMENTE</button>
         </div>
       </div>
+      
+    </article>
+    
+        <article class="card" data-status="soon">
+<div class="obra-card">
+  <img
+    src="https://apolocreativo.site/img/OLVIDE.webp?raw=true"
+    alt="Antes de que me olvide"
+    class="obra-afiche"
+  >
+</div>
+      <div class="card-body">
+        <div class="genre">Comedia · Drama</div>
+        <h3>Antes de que me olvide</h3>
+        <p class="description">Pastora está a punto de irse a un asilo, y sus dos amigas, Carmela y Myriam, la ayudan a ordenar sus pertenencias. De pronto aparece una pequeña caja de lata con un objeto que ninguna de las tres logra identificar.</p>
+        <button class="read-more" type="button" onclick="leerMas('olvide')">LEER MÁS ↗</button>
+        <div class="meta">◷ Fecha: próximamente<br>⌖ Sala: a confirmar · Córdoba</div>
+        <div class="bottom">
+          <div class="price">Muy pronto<small>Venta no habilitada</small></div>
+          <button class="btn outline" onclick="proximamente()">PRÓXIMAMENTE</button>
+        </div>
+      </div>
+      
     </article>
   </div>
 </section>
@@ -739,7 +762,17 @@ const detallesObras = {
     elenco: 'En selección de casting.',
     creditos: 'Libreto: Lolo Ramos.\nDirección: Lolo Ramos.',
     adicional: 'Duración: 60 minutos.\nEstreno y funciones: a confirmar.\nClasificación / edad recomendada: +16.'
+  },
+  
+  olvide: {
+    titulo: 'Antes de que me olvide',
+    genero: 'Comedia dramática',
+    sinopsis: 'Tres amigas, más de sesenta años de historias compartidas y una casa que está a punto de quedar vacía. Antes de que me olvide es una comedia emotiva sobre la amistad, el paso del tiempo y la manera en que los recuerdos sobreviven incluso cuando la memoria empieza a fallar.\n\nEntre situaciones cotidianas, confusiones y recuerdos que se contradicen, las tres mujeres reconstruyen su juventud mientras el escenario alterna entre el presente y el pasado. Pero detrás de las risas hay una historia que solo Pastora recuerda con absoluta claridad: la de Ernesto, el gran amor de su juventud, que partió a la guerra de Malvinas y nunca regresó.\n\nUna obra que se ríe de los olvidos, abraza los recuerdos y demuestra que, a veces, cuidar la memoria de alguien también es una forma de amor.',
+    elenco: 'En selección de casting.',
+    creditos: 'Libreto: Lolo Ramos.\nDirección: Lolo Ramos.',
+    adicional: 'Duración: 60 minutos.\nEstreno y funciones: a confirmar.\nClasificación / edad recomendada: Apto todo.'
   }
+  
 };
 
 const detailOverlay = document.getElementById('detailOverlay');
