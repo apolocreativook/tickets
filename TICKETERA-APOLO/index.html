@@ -459,7 +459,7 @@ footer strong { color:var(--gold); letter-spacing:2px; }
     <article class="card" data-status="available">
 <div class="obra-card">
   <img
-    src="https://apolocreativo.site/img/BUENOS.webp?raw=true"
+    src="https://raw.githubusercontent.com/apolocreativook/apolo-web/refs/heads/main/img/FOTOS%20NUEVAS%20CAMBIAR/buenos%20va%20del%20rosario.webp?raw=true"
     alt="Buenos vecinos"
     class="obra-afiche"
   >
@@ -467,7 +467,7 @@ footer strong { color:var(--gold); letter-spacing:2px; }
       <div class="card-body">
         <div class="genre">Comedia</div>
         <h3>Buenos vecinos</h3>
-        <p class="description">En el almacén de barrio, una compra cotidiana se transforma en una situación explosiva cuando Juanjo, apurado por sus obligaciones, queda envuelto en una inesperada acusación.</p>
+        <p class="description">Buenos Vecinos llega a Villa del Rosario con la comedia de enredos en el almacén de barrio de Tito, donde los chismes, los prejuicios y las sospechas están siempre a la orden del día.</p>
         <button class="read-more" type="button" onclick="leerMas('vecinos')">LEER MÁS ↗</button>
         <div class="meta">◷ Fecha: 22 Noviembre<br>⌖ Sala: Teatrino Ismael Rossi · Va. Del Rosario, Córdoba</div>
         <div class="bottom">
@@ -479,6 +479,30 @@ footer strong { color:var(--gold); letter-spacing:2px; }
         </div>
       </div>
     </article>    
+    
+        <article class="card" data-status="available">
+<div class="obra-card">
+  <img
+    src="https://raw.githubusercontent.com/apolocreativook/apolo-web/refs/heads/main/img/FOTOS%20NUEVAS%20CAMBIAR/buenos%20sl.webp?raw=true"
+    alt="Buenos vecinos"
+    class="obra-afiche"
+  >
+</div>
+      <div class="card-body">
+        <div class="genre">Comedia</div>
+        <h3>Buenos vecinos</h3>
+        <p class="description">Después de recorrer nuevos escenarios, Buenos Vecinos vuelve a su ciudad para reencontrarse con el público cordobés, con la comedia de enredos en el almacén de barrio de Tito.</p>
+        <button class="read-more" type="button" onclick="leerMas('buenos')">LEER MÁS ↗</button>
+        <div class="meta">◷ Fecha: 28 Noviembre<br>⌖ Sala: SL Teatro, Córdoba</div>
+        <div class="bottom">
+          <div class="price">$18.000<small>Precio sin comisión</small></div>
+<button class="btn"
+  onclick="comprar('Buenos vecinos', 20000, 18000, 16000, '28 de noviembre')">
+  COMPRAR
+</button>
+        </div>
+      </div>
+    </article>   
 
     <article class="card" data-status="soon">
 <div class="obra-card">
@@ -750,10 +774,19 @@ const detallesObras = {
   vecinos: {
     titulo: 'Buenos Vecinos',
     genero: 'Comedia',
-    sinopsis: 'En el almacén de barrio, una compra cotidiana se transforma en una situación explosiva cuando Juanjo, apurado por sus obligaciones, queda envuelto en una inesperada acusación. \n\nBuenos Vecinos es una comedia de enredos ambientada en un almacén de barrio, ese lugar donde siempre hay algo para comprar, alguien con quien conversar y, por supuesto, algún chisme que compartir. A través de personajes cotidianos, diálogos desopilantes y situaciones que crecen hasta alcanzar el absurdo, la obra retrata con ironía las pequeñas miserias de la convivencia, los prejuicios, las habladurías y la facilidad con la que una sospecha puede convertirse en una verdad indiscutible. \n\nPero detrás de las risas también aparece una mirada crítica sobre la corrupción, los privilegios y las injusticias sociales. Cuando los vínculos entre los personajes salen a la luz, el almacén deja de ser un simple comercio para convertirse en un escenario donde las diferencias de poder quedan expuestas y la verdad adquiere un peso inesperado.',
+    sinopsis: '¿Qué puede pasar cuando una simple visita al almacén termina convirtiéndose en un escándalo? Juanjo está a punto de descubrirlo cuando una inesperada acusación desata una cadena de enredos, sospechas y situaciones disparatadas.\n\nBuenos Vecinos llega a Villa del Rosario con una comedia que pone bajo la lupa la vida de barrio, los rumores, los prejuicios y esas costumbres tan nuestras de saberlo todo sobre los demás.\n\nCon mucho humor, personajes desopilantes y más de una sorpresa, la obra demuestra que detrás de las apariencias no siempre hay buenas intenciones.\n\n¡Porque en el barrio todos se conocen, pero no todos se cuentan la verdad!',
     elenco: 'Lolo Ramos, Rita Lión, Emme Ochoa, Lili Quinteros',
     creditos: 'Libreto: Rita Lión.\nDirección: Rita Lión.',
     adicional: 'Duración: 60 minutos.\nSala: Teatrino Ismael Rossi\nDirección: San Juan 1035 | Va. Del Rosario, Cba.\nClasificación / edad recomendada: Apto todo público.'
+  }, 
+  
+    buenos: {
+    titulo: 'Buenos Vecinos',
+    genero: 'Comedia',
+    sinopsis: 'En el almacén de barrio, una compra cotidiana se transforma en una situación explosiva cuando Juanjo, apurado por sus obligaciones, queda envuelto en una inesperada acusación.\n\nUna comedia de enredos que retrata, con mucho humor, las pequeñas miserias de la convivencia, los prejuicios, los chismes y esas situaciones tan cotidianas en las que todos podemos reconocernos.\n\nPero detrás de las risas también hay lugar para la crítica social, los privilegios, la corrupción y las injusticias. Porque en este almacén nadie parece ser exactamente lo que dice ser.\n\nCórdoba, nos volvemos a encontrar. Buenos Vecinos regresa a casa con más enredos, secretos y motivos para reírnos juntos.',
+    elenco: 'Lolo Ramos, Rita Lión, Emme Ochoa, Lili Quinteros',
+    creditos: 'Libreto: Rita Lión.\nDirección: Rita Lión.',
+    adicional: 'Duración: 60 minutos.\nSala: SL Teatro\nDirección: Castro Barros 30 | Córdoba Capital.\nClasificación / edad recomendada: Apto todo público.'
   }, 
   
   ultima: {
